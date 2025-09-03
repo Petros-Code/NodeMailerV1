@@ -25,7 +25,6 @@ class UserController {
                 token_expires_at: expiration
             });
 
-            // test Envoyer l'email
             await this.mailer.sendVerificationEmail(email, name, token);
 
             res.status(201).json({ message: "User created. Check your email to verify." });
@@ -39,7 +38,7 @@ class UserController {
 
         try {
             const user = await this.userRepository.verifyUserByToken(token);
-            res.status(200).json({ message: "Compte vérifié avec succès !", user });
+            res.status(200).json({ message: "Account verified with success !", user });
         } catch (error) {
             res.status(400).json({ error: error.message });
         }

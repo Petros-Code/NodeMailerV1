@@ -22,11 +22,11 @@ class Mailer {
         const verificationLink = `http://localhost:3000/users/verify/${token}`;
 
         const mailOptions = {
-            from: `"Mon App" <${process.env.SMTP_USER}>`,
+            from: `"NodeMailer" <${process.env.SMTP_USER}>`,
             to: email,
-            subject: "Confirme ton compte",
+            subject: "Please confirm your account",
             html: `
-                <h2>Hello there ! ${name},</h2>
+                <h2>Hello ${name},</h2>
                 <p>Thank you for subscribing</p>
                 <p>To activate your new account, click on this link :</p>
                 <a href="${verificationLink}">ACTIVATE !</a>
