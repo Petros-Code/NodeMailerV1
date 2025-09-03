@@ -5,13 +5,24 @@ import Mailer from "../utils/mailer.js";
 class UserController {
     constructor(userRepository, mailer) {
         this.userRepository = userRepository;    
-        this.mailer = Mailer;
+        this.mailer = mailer;
     }
 
     async createUser(req, res) {
         const { name, email, password } = req.body;
 
         try {
+            // Validation des champs requis
+            if (!email) {
+                return res.status(400).json({ error: "Email is required" });
+            }
+            if (!name) {
+                return res.status(400).json({ error: "Name is required" });
+            }
+            if (!password) {
+                return res.status(400).json({ error: "Password is required" });
+            }
+
             const hashedPassword = await argon2.hash(password);
 
             const token = uuidv4();

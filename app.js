@@ -7,6 +7,7 @@ import { userRoutes } from "./routes/user.route.js";
 
 import UserRepository from "./modules/user.module.repository.js";
 import UserController from "./modules/user.module.controller.js";
+import Mailer from "./utils/mailer.js";
 
 import initDB from "./config/config.js";
 
@@ -21,7 +22,7 @@ async function startServer() {
     const db = await initDB();
 
     const userRepository = new UserRepository(db);
-    const userController = new UserController(userRepository);
+    const userController = new UserController(userRepository, Mailer);
 
     app.use("/users", userRoutes(userController));
 

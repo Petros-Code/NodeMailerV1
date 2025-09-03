@@ -19,6 +19,11 @@ class Mailer {
     }
 
     async sendVerificationEmail(email, name, token) {
+        // Validation de l'email
+        if (!email) {
+            throw new Error("Email is required for sending verification email");
+        }
+
         const verificationLink = `http://localhost:3000/users/verify/${token}`;
 
         const mailOptions = {

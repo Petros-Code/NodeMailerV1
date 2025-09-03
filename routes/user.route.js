@@ -1,13 +1,13 @@
-import Router from "express";
+import { Router } from "express";
 
 export function userRoutes(userController) {
     const router = Router();
 
     // Création d'utilisateur
-    router.post("/", (req, res) => userController.createUser(req, res));
+    router.post("/", userController.createUser.bind(userController));
 
     // Vérification email
-    router.get("/verify/:token", (req, res) => userController.verifyUser(req, res));
+    router.get("/verify/:token", userController.verifyUser.bind(userController));
 
     return router;
 }

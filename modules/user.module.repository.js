@@ -3,7 +3,7 @@ class UserRepository {
         this.db = db;
     }
 
-    async createUser({ name, email, password, verif_status, verification_token, token_expires_at }) {
+    async createUser({ name, email, password, verif_status = "PENDIND", verification_token, token_expires_at }) {
         try {
             const result = await this.db.run(
                 'INSERT INTO users (name, email, password, verif_status, verification_token, token_expires_at) VALUES (?, ?, ?, ?, ?, ?)',
